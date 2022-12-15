@@ -32,7 +32,7 @@ function handleSubmit(event) {
   addSelectedItemToCart();
   state.cart.saveToLocalStorage();
   updateCounter();
-  updateCartPreview();
+  updateCartPreview(state.cart.items[state.cart.items.length -1]);
 
 }
 
@@ -57,8 +57,15 @@ function updateCounter() {
 }
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
-function updateCartPreview() {
+function updateCartPreview(item) {
+  let p = item.product;
+  let q = item.quantity;
   // TODO: Get the item and quantity from the form
+  // state.cart.items[0].quantity;
+  let contents = document.getElementById('cartContents');
+  let elem = document.createElement('div');
+  elem.textContent = `Product: ${p} Quantity: ${q}`;
+  contents.appendChild(elem);
   // TODO: Add a new element to the cartContents div with that information
 }
 
