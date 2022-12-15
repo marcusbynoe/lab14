@@ -4,7 +4,7 @@
 
 // Set up an empty cart for use on this page.
 state.cart = new Cart([]);
-// ! state.cart.items = [];
+state.cart.items = [];
 
 // On screen load, we call this method to put all of the product options
 // (the things in the state.allProducts array) into the drop down list.
@@ -27,7 +27,7 @@ function populateForm() {
 function handleSubmit(event) {
 
   // TODO: Prevent the page from reloading
-// ! event.preventDefault();
+  event.preventDefault();
   // Do all the things ...
   addSelectedItemToCart();
   state.cart.saveToLocalStorage();
@@ -42,12 +42,19 @@ function addSelectedItemToCart() {
   let item = document.getElementById('items').value;
   console.log(item);
   // TODO: get the quantity
-  
+  let numItem = document.getElementById('quantity').value;
   // TODO: using those, add one item to the Cart
+  state.cart.addItem(item, numItem);
+  updateCounter();
+  console.log(state.cart);
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() { }
+function updateCounter() {
+  total = state.cart.items.length;
+  document.getElementById('itemCount').textContent = total;
+  console.log(total)
+}
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
